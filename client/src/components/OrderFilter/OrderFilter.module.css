@@ -25,6 +25,7 @@
     display: flex;
     align-items: center;
     font-size: 0.7rem;
+    padding: 0px 10px;
 }
 
 .label{
@@ -35,10 +36,14 @@
 }
 /* Estilo para el círculo exterior (radio button) */
 input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     margin-top: -2px;
     margin-right: 5px;
     border: 2px solid black; /* Borde exterior negro */
-    background-color: var(--black);
+    background-color: var(--yell);
+    outline: var(--red);
     border-radius: 50%; /* Hace que el borde sea circular */
     width: 16px; /* Ancho del círculo exterior */
     height: 16px; /* Altura del círculo exterior */
@@ -47,6 +52,6 @@ input[type="radio"] {
   
   /* Estilo para el círculo interior (marca de verificación) */
   input[type="radio"]:checked {
-    background-color: var(--red); /* Cambia el fondo a amarillo cuando está seleccionado */
+    background-color: black;
   }
-  
+
