@@ -1,0 +1,48 @@
+@import "../variables.css"; 
+
+.navContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--sky);
+}
+
+.logo img{
+    padding: 5px 10px;
+    height: 35px;
+}
+.logo img:hover{
+    filter: drop-shadow(0px 0px 4px rgba(26, 26, 26, 0.5));
+}
+
+.link{
+    text-decoration: none;
+}
+
+.botones{
+    display: flex;
+}
+.boton{
+    display: flex;
+    align-items: center;
+    background-color: var(--sky);
+    border: none;
+    border-left: 1px solid black;
+    font-family: var(--pgb);
+    transition: background-color 250ms ease-in-out;
+}
+.boton p{
+    font-size: 0.7rem;
+    word-spacing: -5px;
+    text-decoration: none;
+    padding: 7px 0px;
+}
+.boton img{
+    margin-right: 5px;
+}
+
+.boton:hover{
+    background-color: rgb(45, 119, 215);
+    border-left: 1px solid rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}

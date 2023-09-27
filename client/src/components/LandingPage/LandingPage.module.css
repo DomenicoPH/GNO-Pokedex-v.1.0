@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/bg2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+}
+.logo{
+    width: 800px;
+}
+.go{
+    background-color: var(--sky);
+    border: 8px solid var(--yell);
+    padding: 10px;
+    border-radius: 500px;
+    font-family: var(--pgb);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--yell);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.4);
+    transition: background-color 350ms ease-in-out;
+}
+.go:hover{
+    background-color: var(--yell);
+    color: var(--sky);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    scale: 98%;
+}

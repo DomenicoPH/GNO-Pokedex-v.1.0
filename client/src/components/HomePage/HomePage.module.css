@@ -1,0 +1,7 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Esto asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
+    background-color: var(--yell);
+  }
+  

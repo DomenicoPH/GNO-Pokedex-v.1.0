@@ -1,0 +1,39 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black);
+    margin-top: auto;
+    height: 35px;
+    overflow: hidden;
+}
+.footer p {
+    font-size: 0.7rem;
+    font-weight: lighter;
+    color: var(--yell);
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    animation: marquee 40s linear infinite;
+    animation-direction: normal;
+    opacity: 100%;
+  }
+
+  /*
+  @keyframes marquee {
+    0% {
+      transform: translateX(100vw);
+    }
+    100% {
+      transform: translateX(-75vw);
+    }
+  }
+  */
+
+  .r{
+    font-size: 1rem;
+  }
+  .link{
+    text-decoration: none;
+    color: var(--sky);
+  }

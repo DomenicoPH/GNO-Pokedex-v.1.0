@@ -1,0 +1,42 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid var(--black);
+    margin-top: 10px;
+}
+
+.typeBox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: 200px;
+    padding-bottom: 25px;
+}
+
+.header{
+    font-family: var(--pgb);
+    margin-top: 25px;
+}
+
+.type{
+    display: flex;
+    align-items: center;
+    background-color: var(--black);
+    width: 200px;
+    margin: 1px;
+    border-radius: 20px;
+}
+.type img{
+    height: 30px;
+    padding: 5px;
+    margin-left: 10px;
+}
+.type p{
+    font-family: var(--pgb);
+    font-size: 0.7rem;
+    color: var(--yell);
+    padding: 5px;
+    margin-left: 10px;
+}

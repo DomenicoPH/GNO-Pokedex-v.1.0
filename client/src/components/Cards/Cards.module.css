@@ -1,0 +1,34 @@
+@import "../variables.css";
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 25px;
+}
+.botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.botones button{
+    background-color: var(--black);
+    border-radius: 5px;
+    color: var(--yell);
+    font-family: var(--pgb);
+    padding: 5px;
+    width: 218px;
+    border: none;
+    cursor: pointer;
+}
+.pageNum{
+    text-align: center;
+    background-color: var(--black);
+    border-radius: 5px;
+    color: var(--yell);
+    font-family: var(--pgb);
+    font-size: 0.85rem;
+    padding: 5px;
+    margin: 8px;
+    width: 45px;
+}

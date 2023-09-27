@@ -1,0 +1,16 @@
+:root {
+    /*Colores*/
+    --yell: rgb(255, 203, 5);
+    --red: rgb(182, 10, 10);
+    --sky: rgb(50, 105, 178);
+    --black: rgb(20, 20, 20);
+    --grey1: rgb(25,25,25);
+
+    /*Fonts*/
+    --pgb: "pokegb"
+}
+
+@font-face {
+    font-family: "pokegb";
+    src: url('../assets/fonts/PokemonGb-RAeo.ttf');
+}

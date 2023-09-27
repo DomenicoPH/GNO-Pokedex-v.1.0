@@ -1,0 +1,61 @@
+.container{
+    display: flex;
+    align-items: center;
+}
+.content{
+    display: flex;
+    align-items: center;
+}
+
+.search{
+    font-family: var(--pgb);
+    font-size: 0.7rem;
+    text-decoration: none;
+    padding-left: 20px;
+}
+.input{
+    background-color: var(--black);
+    color: var(--yell);
+    border-radius: 5px;
+    border: none;
+    font-family: var(--pgb);
+    font-size: 0.7rem;
+    padding: 10px;
+    min-width: 400px;
+}
+.input::placeholder{
+    font-size: 0.7rem;
+    color: var(--yell);
+}
+.boton{
+    display: flex;
+    align-items: center;
+    background-color: rgb(45, 119, 215);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    margin-left: 5px;
+    transition: background-color 250ms ease-in-out;
+}
+.boton p{
+    font-family: var(--pgb);
+    font-size: 0.58rem;
+    text-decoration: none;
+}
+
+.boton:hover{
+    background-color: rgb(79, 148, 239);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.pokeball{
+    height: 35px;
+    padding: 0px 10px;
+}
+
+.dex{
+    height: 34px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}

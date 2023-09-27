@@ -1,0 +1,52 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokedex{
+    height: 35px;
+    padding-bottom: 2px;
+}
+
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    font-family: var(--pgb);
+    font-size: 0.6rem;
+    color: var(--yell);
+    margin: 2px 10px;
+    padding: 3px;
+    width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.pageActive{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--yell);
+    box-shadow: inset 0 0 0 1px black;
+    font-family: var(--pgb);
+    font-size: 0.6rem;
+    color: black;
+    margin: 2px 10px;
+    padding: 3px;
+    width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.container div:hover {
+    cursor: pointer;
+    background-color: var(--yell);
+    box-shadow: inset 0 0 0 1px black;
+    background-color: var(--yell);
+    color: black;
+}

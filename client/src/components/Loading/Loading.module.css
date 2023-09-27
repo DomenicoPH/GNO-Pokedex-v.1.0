@@ -1,0 +1,17 @@
+.loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--yell);
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+}
+
+.loading img {
+    height: 100px;
+}
+.loading p{
+    font-family: var(--pgb);
+    font-size: 1.5rem;
+}

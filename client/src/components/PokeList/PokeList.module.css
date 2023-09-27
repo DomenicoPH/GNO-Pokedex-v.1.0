@@ -1,0 +1,48 @@
+.list{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: var(--black);
+    margin: 25px;
+    padding: 10px 25px;
+    max-height: 625px;
+    max-width: 20vw;
+    width: 400px;
+    overflow: scroll;
+    overflow-x: hidden;
+    color: var(--yell);
+    font-family: var(--pgb);
+    font-size: 0.6rem;
+}
+
+
+.list::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+  }
+  
+  .list::-webkit-scrollbar-thumb {
+    background-color: var(--yell);
+    border-radius: 5px;
+  }
+  
+  .list::-webkit-scrollbar-thumb:hover {
+    background-color: #ffd700;
+  }
+  
+
+  .list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--yell) transparent;
+  }
+  
+  .list::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+
+  .names{
+    font-family: var(--pgb);
+    font-size: 0.8rem;
+  }
