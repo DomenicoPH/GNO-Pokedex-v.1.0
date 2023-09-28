@@ -66,7 +66,7 @@ const DetailPage = () => {
       });
   }, [dispatch, id]);
 
-  // Renderiza el componente Loading mientras se carga la información
+  // Cargando pokedex
   if (loading) {
     return <Loading />;
   }

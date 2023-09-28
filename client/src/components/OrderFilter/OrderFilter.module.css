@@ -34,23 +34,22 @@
     font-family: var(--pgb);
     margin-left: 10px;
 }
-/* Estilo para el círculo exterior (radio button) */
+
 input[type="radio"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     margin-top: -2px;
     margin-right: 5px;
-    border: 2px solid black; /* Borde exterior negro */
+    border: 2px solid black;
     background-color: var(--yell);
     outline: var(--red);
-    border-radius: 50%; /* Hace que el borde sea circular */
-    width: 16px; /* Ancho del círculo exterior */
-    height: 16px; /* Altura del círculo exterior */
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
     vertical-align: middle;
   }
   
-  /* Estilo para el círculo interior (marca de verificación) */
   input[type="radio"]:checked {
     background-color: black;
   }

@@ -8,6 +8,7 @@ const FormPage = () => {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
   const pokemons = useSelector((state) => state.pokemons);
+
   const [input, setInput] = useState({
     Nombre: "",
     Imagen: "",
@@ -17,111 +18,155 @@ const FormPage = () => {
     Velocidad: "",
     Altura: "",
     Peso: "",
-    Tipo: [],
+    Tipo: [types.length > 0 ? types[0].Nombre : ""], // Marcar la primera casilla por defecto si hay tipos disponibles
   });
+
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
-    setInput({
-      ...input,
-      [event.target.name]: event.target.value,
-    });
-  };
+    const { name, value, type, checked } = event.target;
 
-  const handleCheck = (event) => {
-    const { name, checked } = event.target;
-    if (checked) {
-      if (!input.Tipo.includes(name)) {
+    if (type === "checkbox") {
+      const selectedTypes = input.Tipo;
+
+      if (checked && selectedTypes.length < 2) {
+        // Permitir marcar si hay menos de 2 tipos seleccionados
         setInput({
           ...input,
-          Tipo: [...input.Tipo, name],
+          Tipo: [...selectedTypes, name],
+        });
+      } else if (!checked) {
+        // Permitir desmarcar si hay más de 1 tipo seleccionado
+        if (selectedTypes.length > 1) {
+          setInput({
+            ...input,
+            Tipo: selectedTypes.filter((tipo) => tipo !== name),
+          });
+        }
+      }
+
+      // Validar que siempre haya al menos una casilla marcada
+      if (input.Tipo.length === 0) {
+        setErrors({
+          ...errors,
+          Tipo: "Debe seleccionar al menos un tipo de Pokémon",
+        });
+      } else {
+        setErrors({
+          ...errors,
+          Tipo: "",
         });
       }
     } else {
       setInput({
         ...input,
-        Tipo: input.Tipo.filter((tipo) => tipo !== name),
+        [name]: value,
       });
+      validateField(name, value);
     }
   };
 
-  const validateForm = () => {
-    let errors = {};
-    let isValid = true;
+  const validateField = (fieldName, value) => {
+    let errorMessage = "";
 
-    if (input.Nombre.trim() === "") {
-      errors.Nombre = "Ingrese un nombre válido";
-      isValid = false;
-    } else if (!/^[A-Za-z-]{1,20}$/.test(input.Nombre)) {
-      errors.Nombre =
-        "El nombre no puede tener más de 20 caracteres, ni números. Únicamente puedes utilizar '-'";
-      isValid = false;
-    } else if (pokemons.some((pokemon) => pokemon.Nombre === input.Nombre)) {
-      errors.Nombre = "Ya existe un Pokémon con este nombre";
-      isValid = false;
+    switch (fieldName) {
+      case "Nombre":
+        if (value.trim() === "") {
+          errorMessage = "Ingrese un nombre válido";
+        } else if (!/^[A-Za-z-]{1,20}$/.test(value)) {
+          errorMessage =
+            "El nombre no puede tener más de 20 caracteres, ni números. Únicamente puedes utilizar '-'";
+        } else if (pokemons.some((pokemon) => pokemon.Nombre === value)) {
+          errorMessage = "Ya existe un Pokémon con este nombre";
+        }
+        break;
+
+      case "Imagen":
+        if (value.trim() === "") {
+          errorMessage = "Ingrese una URL de imagen válida";
+        } else if (!isValidUrl(value)) {
+          errorMessage = "Ingrese una URL de imagen válida";
+        }
+        break;
+
+      case "Vida":
+        const vida = parseInt(value);
+        if (isNaN(vida) || vida < 1 || vida > 255) {
+          errorMessage = "Número entre 1 y 255";
+        }
+        break;
+
+      case "Ataque":
+        const ataque = parseInt(value);
+        if (isNaN(ataque) || ataque < 1 || ataque > 255) {
+          errorMessage = "Número entre 1 y 255";
+        }
+        break;
+
+      case "Defensa":
+        const defensa = parseInt(value);
+        if (isNaN(defensa) || defensa < 5 || defensa > 255) {
+          errorMessage = "Número entre 5 y 255";
+        }
+        break;
+
+      case "Velocidad":
+        const velocidad = parseInt(value);
+        if (isNaN(velocidad) || velocidad < 5 || velocidad > 255) {
+          errorMessage = "Número entre 5 y 255";
+        }
+        break;
+
+      case "Altura":
+        const altura = parseFloat(value);
+        if (isNaN(altura) || altura < 0.1 || altura > 20.0) {
+          errorMessage = "La altura debe ser un número entre 0.1 y 20.0";
+        }
+        break;
+
+      case "Peso":
+        const peso = parseFloat(value);
+        if (isNaN(peso) || peso < 0.1 || peso > 1000.0) {
+          errorMessage = "El peso debe ser un número entre 0.1 y 1000.0";
+        }
+        break;
+
+      case "Tipo":
+        if (value.length === 0 || value.length > 2) {
+          errorMessage = "Debe seleccionar de 1 a 2 tipos de Pokémon";
+        }
+        break;
+
+      default:
+        break;
     }
 
-    if (input.Imagen.trim() === "") {
-      errors.Imagen = "Ingrese una URL de imagen válida";
-      isValid = false;
-    }
+    setErrors({
+      ...errors,
+      [fieldName]: errorMessage,
+    });
+  };
 
-    const Vida = parseInt(input.Vida);
-    if (isNaN(Vida) || Vida < 1 || Vida > 255) {
-      errors.Vida = "Número entre 1 y 255";
-      isValid = false;
-    }
+  // Validación de la URL (sin cambios) ...
 
-    const Ataque = parseInt(input.Ataque);
-    if (isNaN(Ataque) || Ataque < 1 || Ataque > 255) {
-      errors.Ataque = "Número entre 1 y 255";
-      isValid = false;
-    }
-
-    const Defensa = parseInt(input.Defensa);
-    if (isNaN(Defensa) || Defensa < 5 || Defensa > 255) {
-      errors.Defensa = "Número entre 5 y 255";
-      isValid = false;
-    }
-
-    const Velocidad = parseInt(input.Velocidad);
-    if (isNaN(Velocidad) || Velocidad < 5 || Velocidad > 255) {
-      errors.Velocidad = "Número entre 5 y 255";
-      isValid = false;
-    }
-
-    const Altura = parseFloat(input.Altura);
-    if (isNaN(Altura) || Altura < 0.1 || Altura > 20.0) {
-      errors.Altura = "La altura debe ser un número entre 0.1 y 20.0";
-      isValid = false;
-    }
-
-    const Peso = parseFloat(input.Peso);
-    if (isNaN(Peso) || Peso < 0.1 || Peso > 1000.0) {
-      errors.Peso = "El peso debe ser un número entre 0.1 y 1000.0";
-      isValid = false;
-    }
-
-    if (input.Tipo.length === 0 || input.Tipo.length > 2) {
-      errors.Tipo = "Debe seleccionar de 1 a 2 tipos de Pokémon";
-      isValid = false;
-    }
-
-    for (const field in input) {
-      if (typeof input[field] === "string" && input[field].trim() === "") {
-        errors[field] = "Este campo es obligatorio";
-        isValid = false;
-      }
-    }
-
-    setErrors(errors);
-    return isValid;
+  const isValidUrl = (url) => {
+    const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    return urlPattern.test(url);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (validateForm()) {
+    // Verificar que al menos un tipo esté seleccionado
+    const isAtLeastOneTypeSelected = input.Tipo.length > 0;
+
+    // Validar que todos los campos estén llenos y sin errores y que al menos un tipo esté seleccionado
+    const areAllFieldsValid =
+      Object.values(errors).every((error) => error === "") &&
+      Object.values(input).every((value) => value !== "") &&
+      isAtLeastOneTypeSelected;
+
+    if (areAllFieldsValid) {
       dispatch(
         createPokemons({
           Nombre: input.Nombre,
@@ -145,11 +190,11 @@ const FormPage = () => {
         Velocidad: "",
         Altura: "",
         Peso: "",
-        Tipo: [],
+        Tipo: [types.length > 0 ? types[0].Nombre : ""], // Volver a marcar la primera casilla por defecto
       });
       setErrors({});
     } else {
-      alert("Formulario inválido. Por favor, corrija los errores.");
+      alert("Formulario incompleto. Por favor, corrija los errores o selecciona al menos un tipo de Pokémon.");
     }
   };
 
@@ -160,11 +205,8 @@ const FormPage = () => {
 
   return (
     <div className={style.container}>
-      
       <div className={style.formContainer}>
-
         <h1 className={style.title}><img className={style.pika} src={pika} alt="pikachu" />CREAR POKEMON</h1>
-
         <form onSubmit={handleSubmit}>
           <div className={style.block}>
             <label className={style.label}>Nombre:</label>
@@ -204,7 +246,7 @@ const FormPage = () => {
             />
             {errors.Vida && <span>{errors.Vida}</span>}
           </div>
-          
+
           <div className={style.block}>
             <label className={style.label}>Ataque:</label>
             <input
@@ -217,14 +259,14 @@ const FormPage = () => {
             />
             {errors.Ataque && <span>{errors.Ataque}</span>}
           </div>
-          
+
           <div className={style.block}>
             <label className={style.label}>Defensa:</label>
             <input
               type="text"
               value={input.Defensa}
               name="Defensa"
-              placeholder="Entre 1 y 255"
+              placeholder="Entre 5 y 255"
               className={style.input}
               onChange={handleChange}
             />
@@ -237,7 +279,7 @@ const FormPage = () => {
               type="text"
               value={input.Velocidad}
               name="Velocidad"
-              placeholder="Entre 1 y 255"
+              placeholder="Entre 5 y 255"
               className={style.input}
               onChange={handleChange}
             />
@@ -271,36 +313,30 @@ const FormPage = () => {
           </div>
 
           <div className={style.block}>
-
             <div>
               <label className={style.label}>Tipos:</label>
               <p className={style.text}>MAX: 2 tipos</p>
             </div>
-
             <div className={style.boxes}>
               {types.map((tipo) => (
                 <label className={style.labelSmall} key={tipo.Nombre}>
                   <input
                     type="checkbox"
                     name={tipo.Nombre}
-                    value={tipo.Nombre}
-                    onChange={handleCheck}
+                    checked={input.Tipo.includes(tipo.Nombre)}
+                    onChange={handleChange}
                   />
                   {tipo.Nombre}
                 </label>
               ))}
             </div>
-
             {errors.Tipo && <span>{errors.Tipo}</span>}
-
           </div>
 
           <div className={style.botonCrear}>
             <button type="submit">Crear Pokemon</button>
           </div>
-
         </form>
-
       </div>
     </div>
   );

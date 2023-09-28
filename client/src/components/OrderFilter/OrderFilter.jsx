@@ -52,6 +52,7 @@ const OrderFilter = ({resetPage}) => {
             id="allPokemons"
             value="All Pokemons"
             onChange={handleFilter}
+            defaultChecked
           />
         </label>
         <label htmlFor="api" className={style.label}>
