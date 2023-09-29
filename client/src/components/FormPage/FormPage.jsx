@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createPokemons, getTypes, getPokemons } from "../../redux/actions/actions";
+import error from "../../assets/svg/error.svg";
 import style from "./FormPage.module.css";
 import pika from '../../assets/pika.gif';
 
@@ -75,7 +76,7 @@ const FormPage = () => {
           errorMessage = "Ingrese un nombre válido";
         } else if (!/^[A-Za-z-]{1,20}$/.test(value)) {
           errorMessage =
-            "El nombre no puede tener más de 20 caracteres, ni números. Únicamente puedes utilizar '-'";
+            "Máximo 20 caracteres. No números. Puedes utilizar '-'";
         } else if (pokemons.some((pokemon) => pokemon.Nombre === value)) {
           errorMessage = "Ya existe un Pokémon con este nombre";
         }
@@ -120,14 +121,14 @@ const FormPage = () => {
       case "Altura":
         const altura = parseFloat(value);
         if (isNaN(altura) || altura < 0.1 || altura > 20.0) {
-          errorMessage = "La altura debe ser un número entre 0.1 y 20.0";
+          errorMessage = "Número entre 0.1 y 20.0";
         }
         break;
 
       case "Peso":
         const peso = parseFloat(value);
         if (isNaN(peso) || peso < 0.1 || peso > 1000.0) {
-          errorMessage = "El peso debe ser un número entre 0.1 y 1000.0";
+          errorMessage = "Número entre 0.1 y 1000.0";
         }
         break;
 
@@ -194,7 +195,7 @@ const FormPage = () => {
       });
       setErrors({});
     } else {
-      alert("Formulario incompleto. Por favor, corrija los errores o selecciona al menos un tipo de Pokémon.");
+      alert("Formulario incompleto o con errores");
     }
   };
 
@@ -207,109 +208,126 @@ const FormPage = () => {
     <div className={style.container}>
       <div className={style.formContainer}>
         <h1 className={style.title}><img className={style.pika} src={pika} alt="pikachu" />CREAR POKEMON</h1>
+        
         <form onSubmit={handleSubmit}>
           <div className={style.block}>
-            <label className={style.label}>Nombre:</label>
-            <input
-              type="text"
-              value={input.Nombre}
-              name="Nombre"
-              placeholder="Caracteres de la A a la Z y '-'"
-              className={style.input}
-              onChange={handleChange}
-            />
-            {errors.Nombre && <span>{errors.Nombre}</span>}
+            <div className={style.info}>
+              <label className={style.label}>Nombre:</label>
+              <input
+                type="text"
+                value={input.Nombre}
+                name="Nombre"
+                placeholder="Caracteres de la A a la Z y '-'"
+                className={style.input}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.Nombre && <span className={style.errors}>{errors.Nombre}<img src={error} className={style.alert} alt="error" /></span>}
           </div>
 
           <div className={style.block}>
-            <label className={style.label}>Imagen:</label>
-            <input
-              type="text"
-              value={input.Imagen}
-              name="Imagen"
-              placeholder="url"
-              className={style.input}
-              onChange={handleChange}
-            />
-            {errors.Imagen && <span>{errors.Imagen}</span>}
+            <div className={style.info}>
+              <label className={style.label}>Imagen:</label>
+              <input
+                type="text"
+                value={input.Imagen}
+                name="Imagen"
+                placeholder="url"
+                className={style.input}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.Imagen && <span className={style.errors}>{errors.Imagen}<img src={error} className={style.alert} alt="error" /></span>}
           </div>
 
           <div className={style.block}>
-            <label className={style.label}>Vida:</label>
-            <input
-              type="text"
-              value={input.Vida}
-              name="Vida"
-              placeholder="Entre 1 y 255"
-              className={style.input}
-              onChange={handleChange}
-            />
-            {errors.Vida && <span>{errors.Vida}</span>}
+            <div className={style.info}>
+              <label className={style.label}>Vida:</label>
+              <input
+                type="text"
+                value={input.Vida}
+                name="Vida"
+                placeholder="Entre 1 y 255"
+                className={style.input}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.Vida && <span className={style.errors}>{errors.Vida}<img src={error} className={style.alert} alt="error" /></span>}
           </div>
 
           <div className={style.block}>
-            <label className={style.label}>Ataque:</label>
-            <input
-              type="text"
-              value={input.Ataque}
-              name="Ataque"
-              placeholder="Entre 1 y 255"
-              className={style.input}
-              onChange={handleChange}
-            />
-            {errors.Ataque && <span>{errors.Ataque}</span>}
+            <div className={style.info}>
+              <label className={style.label}>Ataque:</label>
+              <input
+                type="text"
+                value={input.Ataque}
+                name="Ataque"
+                placeholder="Entre 1 y 255"
+                className={style.input}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.Ataque && <span className={style.errors}>{errors.Ataque}<img src={error} className={style.alert} alt="error" /></span>}
           </div>
 
           <div className={style.block}>
-            <label className={style.label}>Defensa:</label>
-            <input
-              type="text"
-              value={input.Defensa}
-              name="Defensa"
-              placeholder="Entre 5 y 255"
-              className={style.input}
-              onChange={handleChange}
-            />
-            {errors.Defensa && <span>{errors.Defensa}</span>}
+            <div className={style.info}>
+              <label className={style.label}>Defensa:</label>
+              <input
+                type="text"
+                value={input.Defensa}
+                name="Defensa"
+                placeholder="Entre 5 y 255"
+                className={style.input}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.Defensa && <span className={style.errors}>{errors.Defensa}<img src={error} className={style.alert} alt="error" /></span>}
           </div>
 
           <div className={style.block}>
-            <label className={style.label}>Velocidad:</label>
-            <input
-              type="text"
-              value={input.Velocidad}
-              name="Velocidad"
-              placeholder="Entre 5 y 255"
-              className={style.input}
-              onChange={handleChange}
-            />
-            {errors.Velocidad && <span>{errors.Velocidad}</span>}
+            <div className={style.info}>
+              <label className={style.label}>Velocidad:</label>
+              <input
+                type="text"
+                value={input.Velocidad}
+                name="Velocidad"
+                placeholder="Entre 5 y 255"
+                className={style.input}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.Velocidad && <span className={style.errors}>{errors.Velocidad}<img src={error} className={style.alert} alt="error" /></span>}
           </div>
 
           <div className={style.block}>
-            <label className={style.label}>Altura:</label>
-            <input
-              type="text"
-              value={input.Altura}
-              name="Altura"
-              placeholder="Entre 0.1 y 20.0"
-              className={style.input}
-              onChange={handleChange}
-            />
-            {errors.Altura && <span>{errors.Altura}</span>}
+            <div className={style.info}>
+              <label className={style.label}>Altura:</label>
+              <input
+                type="text"
+                value={input.Altura}
+                name="Altura"
+                placeholder="Entre 0.1 y 20.0"
+                className={style.input}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.Altura && <span className={style.errors}>{errors.Altura}<img src={error} className={style.alert} alt="error" /></span>}
           </div>
 
           <div className={style.block}>
-            <label className={style.label}>Peso:</label>
-            <input
-              type="text"
-              value={input.Peso}
-              name="Peso"
-              placeholder="Entre 0.1 y 1000.0"
-              className={style.input}
-              onChange={handleChange}
-            />
-            {errors.Peso && <span>{errors.Peso}</span>}
+            <div className={style.info}>
+              <label className={style.label}>Peso:</label>
+              <input
+                type="text"
+                value={input.Peso}
+                name="Peso"
+                placeholder="Entre 0.1 y 1000.0"
+                className={style.input}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.Peso && <span className={style.errors}>{errors.Peso}<img src={error} className={style.alert} alt="error" /></span>}
           </div>
 
           <div className={style.block}>

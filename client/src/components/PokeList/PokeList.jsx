@@ -7,7 +7,7 @@ const PokeList = ({pokemons}) => {
             {/*<p className={style.names}>Id Nombres</p>*/}
           {pokemons.map((pokemon) => (
             
-              <h3 className={style.name}>{pokemon.ID} {pokemon.Nombre}</h3>
+              <h3 key={pokemon.ID} className={style.name}>{pokemon.ID} {pokemon.Nombre}</h3>
 
           ))}
         </div>
