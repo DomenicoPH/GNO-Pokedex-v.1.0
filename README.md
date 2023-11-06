@@ -9,7 +9,7 @@ Te encuentras ante una Single Page Application (SPA) diseñada para los amantes 
 
 <br />
 
-# <img src="./client/src/assets/extra.png" alt="screenshot de la SPA" style="max-width: 50px" /> **Explora el Mundo Pokémon**
+# <img src="./client/src/assets/extra.png" alt="screenshot de la SPA" style="max-width: 50px; max-height: 50px;" /> **Explora el Mundo Pokémon**
 En esta SPA, tendrás la oportunidad de visualizar a tus Pokémon favoritos y descubrir sus estadísticas más importantes. Podrás navegar a través de una impresionante lista de Pokémon, conocer sus detalles y disfrutar de su increíble diversidad.  
 
 ## Crea tus Propios Pokémon
