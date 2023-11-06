@@ -46,10 +46,14 @@
 }
 
 .boton img{
-    height: 50px;
+    height: 25px;
 }
 .boton:hover{
     cursor: pointer;
+    scale: 125%;
+}
+.boton:active {
+    scale: 90%;
 }
 
 .pokeball{

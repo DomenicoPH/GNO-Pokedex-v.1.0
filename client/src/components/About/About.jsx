@@ -16,7 +16,7 @@ const About = () => {
             <div className={style.main1}>
 
                 <div className={style.text}>
-                    <img className={style.logo} src={pokemon} alt="Pokemon title" />
+                    {/*<img className={style.logo} src={pokemon} alt="Pokemon title" />*/}
                     <h2>Sobre mi:</h2>
                     <p>Mi nombre es <span className={style.negrita}>Domenico Pagano</span>, y a mis 37 años, me encuentro en un emocionante viaje de transformación profesional. Originario de Lima, Perú, mi historia profesional comenzó en el mundo del arte, donde me desempeñé como diseñador gráfico, ilustrador y dibujante de cómics. Sin embargo, mi pasión por la creatividad, la tecnología y la resolución de problemas me llevó a explorar un nuevo horizonte: la programación.</p>
                 </div>

@@ -1,14 +1,13 @@
 .container{
     display: flex;
     align-items: center;
-    font-family: var();
+    font-family: var(--pgb);
 }
 .orden{
     font-family: var(--pgb);
     margin-right: 10px;
     font-size: 0.7rem;
-}
-  
+} 
 
 .labels{
     display: flex;
@@ -30,7 +29,7 @@ input[type="radio"] {
     appearance: none;
     margin-top: -2px;
     margin-right: 5px;
-    border: 2px solid black;
+    border: 2px solid var(--black);
     background-color: var(--yell);
     outline: var(--red);
     border-radius: 50%;
@@ -40,7 +39,7 @@ input[type="radio"] {
   }
   
   input[type="radio"]:checked {
-    background-color: black;
+    background-color: var(--black);
   }
 
 
