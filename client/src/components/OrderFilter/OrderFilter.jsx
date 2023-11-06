@@ -1,9 +1,9 @@
 import style from "./OrderFilter.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { filterPokemon,orderPokemons,filterByTypes } from "../../redux/actions/actions";
-import { useState } from "react";
+import { filterPokemon, orderPokemons, filterByTypes } from "../../redux/actions/actions";
+import { useEffect, useState } from "react";
 import { getTypes } from "../../redux/actions/actions";
-import { useEffect } from "react";
+import Select from "react-select"; // Importa react-select
 
 // Importa las imágenes de tipos aquí
 import unknown from "../../assets/types/unknown.svg";
@@ -53,10 +53,8 @@ const getImageByType = (type) => {
   return typeImages[type.toLowerCase()];
 };
 
-const OrderFilter = ({resetPage}) => {
+const OrderFilter = ({ resetPage }) => {
   const dispatch = useDispatch();
-  const [aux, setAux] = useState(false);
-  const [selectedTipo, setSelectedTipo] = useState(false);
   const tipos = useSelector((state) => state.types);
   useEffect(() => {
     dispatch(getTypes());
@@ -67,30 +65,77 @@ const OrderFilter = ({resetPage}) => {
     resetPage();
   };
 
-  const handleFilterByTypes = (event) => {
-    setSelectedTipo(event.target.value);
-    dispatch(filterByTypes(event.target.value));
+  const handleOrder = (selectedOption) => {
+    dispatch(orderPokemons(selectedOption.value));
   };
 
-  const handleOrder = (event) => {
-    dispatch(orderPokemons(event.target.value));
-    setAux(!aux);
+  const [selectedType, setSelectedType] = useState(null); // Estado para el tipo seleccionado
+
+  const handleFilterByTypes = (selectedOption) => {
+    // Cuando se selecciona un tipo, actualiza el estado y aplica el filtro
+    setSelectedType(selectedOption);
+    dispatch(filterByTypes(selectedOption.value));
   };
+
+  // Convierte los tipos en un formato adecuado para react-select
+  const filteredTipos = tipos.filter((type) => type.Nombre !== 'unknown' && type.Nombre !== 'shadow');
+
+  // Agrega la opción "Selecciona tipo" al principio de las opciones
+  const typeOptions = [
+    { value: null, label: "All types" }, // Opción para restablecer
+    ...filteredTipos.map((type) => ({
+      value: type.Nombre,
+      label: (
+        <div className={style.type}>
+          <img
+            src={getImageByType(type.Nombre)}
+            alt={type.Nombre}
+            className={style.typeImage}
+          />
+          {type.Nombre}
+        </div>
+      ),
+    })),
+  ];
+
+  // Custon styles (para los Select)
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: "black", // Fondo negro
+      minWidth: '200px',
+      border: 'none',
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? "rgb(50, 105, 178)" : "black", // Fondo amarillo cuando la opción está enfocada
+      color: "rgb(255, 203, 5)", // Letras amarillas
+      padding: '10px',
+      border: 'none',
+      marginTop: '-4px',
+      marginBottom: '-4px',
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: "rgb(255, 203, 5)", // Letras amarillas
+    }),
+  };
+
+  // Opciones de orden
+  const orderOptions = [
+    { value: "Id", label: "Por Id" },
+    { value: "AscendingAZ", label: "Ascendente A-Z" },
+    { value: "DescendingZA", label: "Descendente Z-A" },
+    { value: "AscendingAttack", label: "Ascendente (Attack)" },
+    { value: "DescendingAttack", label: "Descendente (Attack)" },
+  ];
+  const defaultOrderOption = orderOptions[0];
 
   return (
     <div className={style.container}>
 
-      <p className={style.orden}>ORDEN</p>
-
-      <select onChange={handleOrder} className={style.option}>
-        <option value="Id">Por Id</option>
-        <option value="AscendingAZ">Ascendente A-Z</option>
-        <option value="DescendingZA">Descendente Z-A</option>
-        <option value="AscendingAttack">Ascendente (Attack)</option>
-        <option value="DescendingAttack">Descendente (Attack)</option>
-      </select>
-
       <div className={style.labels}>
+
         <label htmlFor="allPokemons" className={style.label}>
           {" "}
           ALL
@@ -103,6 +148,7 @@ const OrderFilter = ({resetPage}) => {
             defaultChecked
           />
         </label>
+
         <label htmlFor="api" className={style.label}>
           {" "}
           <span className={style.radio}>API</span>
@@ -114,6 +160,7 @@ const OrderFilter = ({resetPage}) => {
             onChange={handleFilter}
           />
         </label>
+
         <label htmlFor="baseDeDatos" className={style.label}>
           {" "}
           DB
@@ -125,23 +172,27 @@ const OrderFilter = ({resetPage}) => {
             onChange={handleFilter}
           />
         </label>
-      </div>
 
-      <div>
-        <select onChange={handleFilterByTypes} className={style.option}>
-          <option value="All Pokemons">All types</option>
-          {tipos.map((type) => (
-            <option key={type.ID} value={type.Nombre}>
-              {type.Nombre}
-              <img
-                src={getImageByType(type.Nombre)}
-                alt={type.Nombre}
-                className={style.typeImage}
-              />
-            </option>
-          ))}
-        </select>
       </div>
+      
+      <p className={style.orden}>ORDEN</p>
+      <Select
+        options={orderOptions}
+        onChange={handleOrder}
+        className={style.option}
+        defaultValue={defaultOrderOption}
+        placeholder="Selecciona orden"
+        styles={customStyles}
+      />
+      
+      <Select
+        options={typeOptions}
+        onChange={handleFilterByTypes}
+        className={style.option}
+        value={selectedType} // Establece el valor seleccionado
+        placeholder="All types"
+        styles={customStyles}
+      />
       
     </div>
   );

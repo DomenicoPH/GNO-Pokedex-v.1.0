@@ -1,24 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
 import style from "./Nav.module.css";
 import logo from "../../assets/pokedex_mod3.png";
 import exit from "../../assets/svg/exit.svg";
 import lab from "../../assets/svg/lab.svg";
+import pika from "../../assets/pika.gif";
+import poke from "../../assets/logoInicio.png";
 
 const Nav = () => {
   return (
     <div className={style.navContainer}>
+
+        <div className={style.PI}>
+          <img className={style.poke} src={poke} alt="Pokemon" />
+          {/*<img className={style.pika} src={pika} alt="Pikachu" />*/}
+        </div>
 
         <a href="/home">
             <div className={style.logo}>
                 <img src={logo} alt="Pokedex Logo" />
             </div>
         </a>
-
-        <div className={style.SearchBar}>
-            <SearchBar />
-        </div>
 
         <div className={style.botones}>
             <Link to="/form" className={style.link}>

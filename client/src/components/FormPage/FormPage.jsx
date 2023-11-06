@@ -19,7 +19,7 @@ const FormPage = () => {
     Velocidad: "",
     Altura: "",
     Peso: "",
-    Tipo: [types.length > 0 ? types[0].Nombre : ""], // Marcar la primera casilla por defecto si hay tipos disponibles
+    Tipo: [types.length > 0 ? types[0].Nombre : ""], // Marcar la primera casilla disponible por defecto
   });
 
   const [errors, setErrors] = useState({});
@@ -50,7 +50,7 @@ const FormPage = () => {
       if (input.Tipo.length === 0) {
         setErrors({
           ...errors,
-          Tipo: "Debe seleccionar al menos un tipo de Pokémon",
+          Tipo: "Debe seleccionar al menos un tipo de Pokémon", 
         });
       } else {
         setErrors({
@@ -72,9 +72,9 @@ const FormPage = () => {
 
     switch (fieldName) {
       case "Nombre":
-        if (value.trim() === "") {
+        if (value.trim() === "") {  // Campo vacio ERROR!
           errorMessage = "Ingrese un nombre válido";
-        } else if (!/^[A-Za-z-]{1,20}$/.test(value)) {
+        } else if (!/^[A-Za-z-]{1,20}$/.test(value)) {  // Caracter no permitido | número de caracteres supera el máximo ERROR!
           errorMessage =
             "Máximo 20 caracteres. No números. Puedes utilizar '-'";
         } else if (pokemons.some((pokemon) => pokemon.Nombre === value)) {
@@ -148,10 +148,9 @@ const FormPage = () => {
     });
   };
 
-  // Validación de la URL (sin cambios) ...
-
+  // Validación de la URL
   const isValidUrl = (url) => {
-    const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    const urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i; // Dbe tener una estructura url válida
     return urlPattern.test(url);
   };
 

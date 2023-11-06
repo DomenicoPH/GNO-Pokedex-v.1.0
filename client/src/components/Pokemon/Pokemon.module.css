@@ -2,15 +2,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 65vh;
 }
 
 .grid{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding-top: 20px;
-    min-width: 80vw;
+    min-width: 20vw;
+    max-width: 90vw;
 }
 .card{
     display: flex;
@@ -20,44 +19,61 @@
     background-color: var(--black);
     border-radius: 5px;
     margin: 4px;
+    min-width: 35px;
+    max-height: 250px;
+    transition: box-shadow 450ms ease-in-out, background-color 450ms ease-out, border-radius 450ms ease-out, transform 450ms;
+}
+.foundCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    border-radius: 5px;
+    margin: 4px;
+    min-width: 280px;
     transition: box-shadow 450ms ease-in-out, background-color 450ms ease-out, border-radius 450ms ease-out, transform 450ms;
 }
 .image{
-    height: 150px;
-    width: 150px;
+    height: 85px;
+    width: 85px;
     padding: 0px 45px;
-    margin: -10px 0px;
+    margin: -10px 10px;
     transition: filter 450ms ease-in-out;
 }
 .types{
     background-color: var(--black);
     border-radius: 500px;
-    padding: 4px 8px;
+    padding: 2px 8px;
     transition: background-color 450ms ease-in-out, border-radius 450ms ease-in-out;
 }
 .name{
     font-family: var(--pgb);
+    font-size: 0.9rem;
     color: var(--yell);
     margin-top: 35px;
+    padding-bottom: 20px;
 }
 .id{
     font-family: var(--pgb);
     color: var(--yell);
+    font-size: 0.7rem;
     margin-top: 0;
     max-width: 70px;
     max-height: 18px;
     overflow: hidden;
+    padding-bottom: 20px;
 }
 .PokemonTypeImage{
-    height: 25px;
+    height: 20px;
     padding: 5px;
 }
 
 .card:hover{
-    background-color: rgb(249, 232, 205);
-    box-shadow: inset 0 0 0 5px black;
+    background-color: var(--yell);
     overflow: hidden;
-    border-radius: 15px;
+    /*box-shadow: inset 0 0 0 5px black;*/
+    /*border-radius: 500px;*/
 }
 
 .card:hover .name, .id {
@@ -70,14 +86,13 @@
 .card:hover .types {
     background-color: black;
     border-radius: 500px;
-    padding: 4px 8px;
 }
 
 .cargando{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 73.5vh;
+    height: 100vh;
 }
 .cargando img{
     height: 100px;
@@ -85,4 +100,4 @@
 .cargando p{
     font-size: 1rem;
 }
-  
+

@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import PageIndex from "../PageIndex/PageIndex";
 import Pokemon from "../Pokemon/Pokemon";
-import TypesBox from "../TypesBox/TypesBox";
 import OrderFilter from "../OrderFilter/OrderFilter";
+import SearchBar from "../SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { getPokemons } from "../../redux/actions/actions";
 import style from "./Cards.module.css";
@@ -27,6 +27,7 @@ const Cards = () => {
     setActualPage(pageNumber);
   };
 
+  /* BORRAR (!)
   const startPage = (actualPage - 1) * pokemonsPerPage;
   const endPage = startPage + pokemonsPerPage;
   //const currentPokemonsForPagination = pokemons.slice(startPage, endPage);
@@ -43,6 +44,7 @@ const Cards = () => {
       setActualPage(actualPage + 1);
     }
   };
+  */
 
   const resetPage = () => {
     setActualPage(1);
@@ -50,22 +52,27 @@ const Cards = () => {
   
 
   return (
+
     <div className={style.cards}>
+        
       {/* Componente Paginacón TOP */}
       <div className={style.header}>
-        <PageIndex
-          totalPages={Math.ceil(pokemons.length / pokemonsPerPage)}
-          currentPage={actualPage}
-          onPageChange={paginate}
-        />
+        <SearchBar resetPage={resetPage}/>
         <OrderFilter resetPage={resetPage} />
       </div>
-
 
       {/* Componente Pokemon con las CARDS y sus detalles */}
       <Pokemon pokemons={currentPokemons} />
 
-      {/* Botones ANTERIOR y SIGUIENTE Paginación BOTTOM */}
+      <PageIndex
+          totalPages={Math.ceil(pokemons.length / pokemonsPerPage)}
+          currentPage={actualPage}
+          onPageChange={paginate}
+        />
+
+      {/* 
+      Botones ANTERIOR y SIGUIENTE Paginación BOTTOM  - BORRAR (!)
+
       <div className={style.botones}>
         <button onClick={PreviousPage} disabled={actualPage === 1}>
           Anterior
@@ -76,10 +83,10 @@ const Cards = () => {
         <button onClick={NextPage} disabled={endPage >= pokemons.length}>
           Siguiente
         </button>
-      </div>
 
-      {/* Aquí va el cuadro con los types (icono | type name) */}
-      <TypesBox />
+      </div>
+      */}
+
     </div>
   );
 };

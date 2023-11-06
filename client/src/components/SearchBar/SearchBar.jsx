@@ -1,68 +1,74 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getPokemonName, getPokemons } from "../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getPokemonName, getPokemons, getTypes } from "../../redux/actions/actions";
 import style from "./SearchBar.module.css";
-import dex from "../../assets/dex2.png"
-import pokeball from "../../assets/pokeball.png"
+import pokeball from "../../assets/pokeball.png";
 
-const SearchBar = () => {
+const SearchBar = ({ resetPage }) => {
   const dispatch = useDispatch();
-  const [nombre, setNombre] = useState("");
-  const [error, setError] = useState(null);
+  const [searchText, setSearchText] = useState("");
+  const [foundPokemon, setFoundPokemon] = useState(null);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (!nombre) {
-      return setError("Ingrese un nombre válido");
-    } else {
-      dispatch(getPokemonName(nombre));
-      setNombre("");
-    }
+  const pokemons = useSelector((state) => state.pokemonsOrigin);
+  //console.log(pokemons)
+
+  useEffect(() => {
+    dispatch(getPokemons());
+    dispatch(getTypes());
+  }, [dispatch]);
+
+  const handleChange = (event) => {
+    setSearchText(event.target.value);
+    setFoundPokemon(null); // Reiniciar el Pokémon encontrado al cambiar el texto
   };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      handleSubmit(event);
+      handleSubmit();
     }
   };
 
-  useEffect(() => {
-    dispatch(getPokemons());
-  }, [dispatch]);
-
-  const handleChange = (event) => {
-    event.preventDefault();
-    setNombre(event.target.value);
+  const handleSubmit = async () => {
+    const found = pokemons.find((pokemon) => pokemon.Nombre === searchText);
+    if (found) {
+      try {
+        await dispatch(getPokemonName(searchText));
+        resetPage();
+        setFoundPokemon('');
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    } else {
+      setFoundPokemon("Pokemon no encontrado");
+    }
   };
-
-  const handleClear = (event) => {
-    event.preventDefault();
-    setNombre("");
-    dispatch(getPokemons());
-  };
+  
 
   return (
     <div className={style.container}>
+      
       <div className={style.content}>
-        <img src={pokeball} alt="pokeball" className={style.pokeball} />
+
+        {/* Campo de texto para la búsqueda */}
         <input
           type="text"
-          placeholder="Pokemon"
-          value={nombre}
-          onChange={handleChange}
-          onKeyPress={handleKeyPress}
+          placeholder="Busca un Pokémon ..."
           className={style.input}
+          onChange={handleChange}
+          onKeyPress={handleKeyPress} // busqueda con "Enter"
+          value={searchText}
         />
 
-        <button className={style.boton} type="submit" onClick={handleSubmit}>
-          <p>BUSCAR</p>
+        <button onClick={handleSubmit} className={style.boton}>
+          <img src={pokeball} alt="pokeball" className={style.pokeball} />
         </button>
 
-        {/*<button className={style.boton} onClick={handleClear}>
-            <img src={dex} alt="pokedex" className={style.dex} />
-        </button>*/}
-
       </div>
+
+        <p className={foundPokemon ? style.foundPokemon : style.notFoundPokemon}>
+          {foundPokemon}
+        </p>
+
     </div>
   );
 };

@@ -5,6 +5,18 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--sky);
+    position: fixed;
+    width: 100vw;
+}
+
+.poke{
+    height: 35px;
+    margin-left: 5px;
+    padding: 5px 0px;
+    margin-right: 75px;
+}
+.pika{
+    height: 75px;
 }
 
 .logo img{

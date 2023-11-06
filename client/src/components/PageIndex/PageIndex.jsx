@@ -6,6 +6,19 @@ const PageIndex = ({ totalPages, currentPage, onPageChange }) => {
 
   return (
     <div className={style.container}>
+      {/* Botón Anterior */}
+      <div
+        className={`page-number ${currentPage === 1 ? style.pageDisabled : style.page}`}
+        onClick={() => {
+          if (currentPage !== 1) {
+            onPageChange(currentPage - 1);
+          }
+        }}
+      >
+        {"<"}
+      </div>
+
+      {/* Números de página */}
       {pageNumbers.map((pageNumber) => (
         <div
           key={pageNumber}
@@ -15,6 +28,18 @@ const PageIndex = ({ totalPages, currentPage, onPageChange }) => {
           {pageNumber}
         </div>
       ))}
+
+      {/* Botón Siguiente */}
+      <div
+        className={`page-number ${currentPage === totalPages ? style.pageDisabled : style.page}`}
+        onClick={() => {
+          if (currentPage !== totalPages) {
+            onPageChange(currentPage + 1);
+          }
+        }}
+      >
+        {">"}
+      </div>
     </div>
   );
 };

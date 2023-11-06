@@ -8,18 +8,7 @@
     margin-right: 10px;
     font-size: 0.7rem;
 }
-.option{
-    display: flex;
-    align-items: center;
-    height: 30px;
-    padding: 0px 10px;
-    background-color: var(--black);
-    color: var(--yell);
-    font-family: var(--pgb);
-    font-size: 0.6rem;
-    border-radius: 5px;
-    border: none;
-}
+  
 
 .labels{
     display: flex;
@@ -54,6 +43,23 @@ input[type="radio"] {
     background-color: black;
   }
 
+
+  
+.option{
+    display: flex;
+    align-items: center;
+    font-family: var(--pgb);
+    font-size: 0.7rem;
+    min-width: 100px;
+    margin: 0px 5px;
+}
+.type{
+    display: flex;
+    align-items: center;
+}
 .typeImage{
-    height: 50px;
+    height: 20px;
+    margin-right: 6px;
+    padding: 5px;
+    border-radius: 50px;
 }

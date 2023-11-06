@@ -6,6 +6,9 @@
     margin-top: auto;
     height: 35px;
     overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
 }
 .footer p {
     font-size: 0.7rem;

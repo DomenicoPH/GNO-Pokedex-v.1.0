@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin: 25px 0px;
 }
 
 .pokedex{
@@ -24,6 +25,23 @@
     height: 25px;
     border-radius: 100px;
     text-align: center;
+    user-select: none;
+}
+.pageDisabled{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    font-family: var(--pgb);
+    font-size: 0.6rem;
+    color: var(--yell);
+    margin: 2px 10px;
+    padding: 3px;
+    width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    text-align: center;
+    user-select: none;
 }
 
 .pageActive{
